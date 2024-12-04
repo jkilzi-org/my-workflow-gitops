@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: F05EB00E.D9D7.46B1.BC27.136EB02E22E1
+  namespace: orchestrator-gitops
+  labels:
+    app-type: bootstrap
+    app: F05EB00E.D9D7.46B1.BC27.136EB02E22E1
+    rht-gitops.com/janus-argocd: F05EB00E.D9D7.46B1.BC27.136EB02E22E1
+spec:
+  destination:
+    namespace: sonataflow-infra
+    server: https://kubernetes.default.svc
+  project: orchestrator-gitops
+  source:
+    path: argocd
+    repoURL: git@github.com:jkilzi-org/my-workflow.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      # Keep history of pipeline runs
+      prune: false
+      selfHeal: true
